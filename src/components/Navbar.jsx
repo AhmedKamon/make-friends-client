@@ -1,9 +1,11 @@
 
 const Navbar = () => {
     return (
-        <div>
-            navbar
-        </div>
+        <nav>
+            <div className="logo-container">
+                <img className="logo" src="" alt="" />
+            </div>
+        </nav>
     );
 };
 
