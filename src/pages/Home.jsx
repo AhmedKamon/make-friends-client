@@ -1,21 +1,32 @@
-import React from 'react';
+import React, { useState } from 'react';
+import AuthModal from '../components/AuthModal';
 import Navbar from '../components/Navbar';
 
 const authToken = false;
+
 const Home = () => {
+  const [showModal, setShowModal] = useState(false);
+
   const handelClick = () => {
-    console.log('clicked');
+    setShowModal(true);
+    console.log('clicked', showModal);
   };
   return (
-    <>
-      <Navbar />
+    <div className="overlay">
+      <Navbar
+        minimal={false}
+        authToken={authToken}
+        showModal={showModal}
+        setShowModal={setShowModal}
+      />
       <div className="home">
-        <h1>swip Right ©</h1>
+        <h1>Start something epic </h1>
         <button className="primary-button" onClick={handelClick}>
           {authToken ? 'SignOut' : 'Create Account'}
         </button>
+        {showModal && <AuthModal setShowModal={setShowModal} />}
       </div>
-    </>
+    </div>
   );
 };
 
