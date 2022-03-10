@@ -136,3 +136,49 @@ nav .nav-button:disabled{
         margin: 8px;
         font-size: 18px;
     }
+
+
+    /* --------------onboarding------------- */
+    .onboarding form {
+        display: flex;
+        justify-content: center;
+    }
+    .onboarding form section{
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+        width: 30%;
+    } 
+    .onboarding form  input{
+        padding: 15px 30px;
+        margin: 10px 0;
+        font-size: 15px;
+        border: 2px solid rgba(128, 128, 128, 0.555);
+        border-radius: 10px;
+    }
+    .onboarding form  input::-webkit-outer-spin-button,.onboarding form  input::-webkit-outer-inner-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+    .onboarding form lable{
+        margin: 10px 0;
+    }
+    .onboarding form  .multiple-input-container{
+        display: flex;
+    } 
+    .onboarding form   input{
+        margin-right: 10px;
+    }
+    .onboarding form  .multiple-input-container label{
+        border: solid 2px rgb(144,144,144);
+        border-radius: 10px;
+        transition: all 0.3s;
+        padding: 10px;
+        margin-right: 10px;
+    }
+    .onboarding form   input[type='radio']{
+        display: none;
+    }
+    .onboarding form   input[type='radio']:checked + label{
+       border: solid 2px rgb(221, 39, 22);
+    }

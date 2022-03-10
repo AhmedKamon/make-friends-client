@@ -66,7 +66,7 @@ const Onboarding = () => {
                 name="gender_identity"
                 value={'man'}
                 onChange={handelChange}
-                checked={false}
+                checked={true}
               />
               <label htmlFor="man-gender-identity">Man</label>
               <input
