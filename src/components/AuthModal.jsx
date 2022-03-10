@@ -1,14 +1,23 @@
 import React, { useState } from 'react';
 
-const AuthModal = ({ setShowModal }) => {
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [confermPassword, setConfermPassword] = useState('')
-    const [error, setError] = useState('')
+const AuthModal = ({ setShowModal, isSignup }) => {
+    const [email, setEmail] = useState(null)
+    const [password, setPassword] = useState(null)
+    const [confermPassword, setConfermPassword] = useState(null)
+    const [error, setError] = useState(null)
+    console.log(email,password,confermPassword);
+
     const handelSubmit = (e) =>{
         e.preventDefault()
+        try {
+          if(isSignup && (password !== confermPassword)){
+            setError('password need to match')
+          }
+          console.log('make a post req');
+        } catch (error) {
+          console.log(error, 'raaa');
+        }
     }
-  const isSignup = true;
 
   return (
     <div className="wrapper">
@@ -21,7 +30,18 @@ const AuthModal = ({ setShowModal }) => {
         <form onSubmit={handelSubmit} >
             <input type="email" name='emali' id='emali' placeholder='example@email.com' required={true}
             onChange={(e) => setEmail(e.target.value)} />
+
+            <input type="password" name='password' id='password' placeholder='password' required={true}
+            onChange={(e) => setPassword(e.target.value)} />
+
+           { isSignup && <input type="password" name='password-check' id='password-check' placeholder='confirm password' required={true}
+            onChange={(e) => setConfermPassword(e.target.value)} />}
+
+            <input className='secondary-button' type="submit" />
+            <p>{error}</p>
         </form>
+        <hr />
+        <h2>GET THE APP</h2>
       </div>
     </div>
   );

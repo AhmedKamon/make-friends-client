@@ -6,9 +6,12 @@ const authToken = false;
 
 const Home = () => {
   const [showModal, setShowModal] = useState(false);
+  const [isSignup, setIsSignup] = useState(true);
 
   const handelClick = () => {
     setShowModal(true);
+    setIsSignup(true)
+    
     console.log('clicked', showModal);
   };
   return (
@@ -18,13 +21,14 @@ const Home = () => {
         authToken={authToken}
         showModal={showModal}
         setShowModal={setShowModal}
+        setIsSignup={setIsSignup}
       />
       <div className="home">
-        <h1>Start something epic </h1>
+        <h1 className='primary-title'>Start something epic </h1>
         <button className="primary-button" onClick={handelClick}>
           {authToken ? 'SignOut' : 'Create Account'}
         </button>
-        {showModal && <AuthModal setShowModal={setShowModal} />}
+        {showModal && <AuthModal setShowModal={setShowModal} isSignup={isSignup}  />}
       </div>
     </div>
   );
