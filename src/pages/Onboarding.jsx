@@ -1,38 +1,35 @@
-
 import { useState } from 'react';
 import Navbar from '../components/Navbar';
 
 const Onboarding = () => {
-  const [formData,setFormData] = useState({
-    user_id:'',
-    first_name:'',
-    dob_day:'',
-    dob_month:'',
-    dob_year:'',
-    show_gender:false,
-    gender_identity:'man',
-    gender_interest:'woman',
-    email:'',
-    url:'',
-    about:'',
-    matches:[]
-  })
+  const [formData, setFormData] = useState({
+    user_id: '',
+    first_name: '',
+    dob_day: '',
+    dob_month: '',
+    dob_year: '',
+    show_gender: false,
+    gender_identity: 'man',
+    gender_interest: 'woman',
+    email: '',
+    url: '',
+    about: '',
+    matches: [],
+  });
   const handelChange = (e) => {
     console.log(e);
-    const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
-    const name = e.target.name
-    console.log('name'+ name, 'value' + value);
+    const value =
+      e.target.type === 'checkbox' ? e.target.checked : e.target.value;
+    const name = e.target.name;
 
-    setFormData((prevState) =>(
-      {
-        ...prevState,
-        [name]: value
-      }
-    ))
+    setFormData((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
   };
-  console.log(formData,'form');
+  console.log(formData, 'form');
   const handelSubmit = () => {
-     console.log('sub');
+    console.log('sub');
   };
   return (
     <>
@@ -117,14 +114,14 @@ const Onboarding = () => {
 
             <label htmlFor="show-gender"> Show gender on my profile</label>
             <input
-                type="checkbox"
-                id="show-gender"
-                name="show_gender"
-                onChange={handelChange}
-                checked={formData.show_gender}
-              />
-              <label > Show Me</label>
-              <div className='multiple-input-container'>
+              type="checkbox"
+              id="show-gender"
+              name="show_gender"
+              onChange={handelChange}
+              checked={formData.show_gender}
+            />
+            <label> Show Me</label>
+            <div className="multiple-input-container">
               <input
                 type="radio"
                 id="man-gender-interest"
@@ -152,18 +149,32 @@ const Onboarding = () => {
                 checked={formData.gender_interest === 'everyone'}
               />
               <label htmlFor="everyone-gender-interest">Everyone</label>
-              </div>
-              <label htmlFor="about">About Me</label>
-              <input type="text" name="about" id="about" required={true} placeholder='i like to code alone' value={formData.about} onChange={handelChange} />
-              <input type="submit" className='secondary-button' />
+            </div>
+            <label htmlFor="about">About Me</label>
+            <input
+              type="text"
+              name="about"
+              id="about"
+              required={true}
+              placeholder="i like to code alone"
+              value={formData.about}
+              onChange={handelChange}
+            />
+            <input type="submit" className="secondary-button" />
           </section>
 
           <section>
-              <label htmlFor="url">Profile Photo</label>
-              <input type="url" name="url" id="url" onChange={handelChange} required={true} />
-              <div className='photo-container'>
-                <img src={formData.url} alt="" />
-              </div>
+            <label htmlFor="url">Profile Photo</label>
+            <input
+              type="url"
+              name="url"
+              id="url"
+              onChange={handelChange}
+              required={true}
+            />
+            <div className="photo-container">
+              <img src={formData.url} alt="" />
+            </div>
           </section>
         </form>
       </div>
