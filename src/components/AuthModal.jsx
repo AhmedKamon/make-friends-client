@@ -1,21 +1,38 @@
 import React, { useState } from 'react';
+import {useNavigate} from 'react-router-dom';
+import axios from 'axios'
+import {useCookies} from 'react-cookie'
 
 const AuthModal = ({ setShowModal, isSignup }) => {
     const [email, setEmail] = useState(null)
     const [password, setPassword] = useState(null)
     const [confermPassword, setConfermPassword] = useState(null)
     const [error, setError] = useState(null)
-    console.log(email,password,confermPassword);
+    const [cookies, setCookie, removeCookie] = useCookies(['user']);
+    let navigate = useNavigate()
+   
+    
 
-    const handelSubmit = (e) =>{
+    const handelSubmit = async (e) =>{
         e.preventDefault()
         try {
           if(isSignup && (password !== confermPassword)){
             setError('password need to match')
+            return
           }
-          console.log('make a post req');
+          // make a post request
+         const response = await axios.post(`http://localhost:8000/${isSignup ? 'signup' : 'login'}`, {email,password})
+         setCookie('Email',response.data.email)
+         setCookie('UserId',response.data.userId)
+         setCookie('AuthToken',response.data.token)
+         const success = response.status === 201
+         if (success && isSignup) navigate('/onboarding')
+         if (success && !isSignup) {
+           
+          navigate('/dashboard')
+         }
         } catch (error) {
-          console.log(error, 'raaa');
+          console.log(error, 'error in front');
         }
     }
 

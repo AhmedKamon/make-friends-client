@@ -1,9 +1,14 @@
 import { useState } from 'react';
 import Navbar from '../components/Navbar';
+import {useCookies} from 'react-cookie'
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const Onboarding = () => {
+  let navigate = useNavigate()
+  const [cookies, setCookie, removeCookie] = useCookies(['user']);
   const [formData, setFormData] = useState({
-    user_id: '',
+    user_id: cookies?.UserId,
     first_name: '',
     dob_day: '',
     dob_month: '',
@@ -11,7 +16,7 @@ const Onboarding = () => {
     show_gender: false,
     gender_identity: 'man',
     gender_interest: 'woman',
-    email: '',
+    email: cookies?.Email,
     url: '',
     about: '',
     matches: [],
@@ -27,9 +32,25 @@ const Onboarding = () => {
       [name]: value,
     }));
   };
-  console.log(formData, 'form');
-  const handelSubmit = () => {
-    console.log('sub');
+ 
+
+  const handelSubmit = async (e) => {
+    e.preventDefault()
+    try {
+     
+     const response = await axios.put('http://localhost:8000/user',{ formData})
+     const success =  response.status === 200
+
+     if(success) {
+      navigate('/dashboard')
+     }else{
+       console.log('faid');
+     };
+     
+
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <>
@@ -173,7 +194,7 @@ const Onboarding = () => {
               required={true}
             />
             <div className="photo-container">
-              <img src={formData.url} alt="" />
+              { formData.url && <img src={formData.url} alt="" />}
             </div>
           </section>
         </form>
